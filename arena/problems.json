@@ -1,0 +1,1060 @@
+{
+  "schemaVersion": 1,
+  "license": "MIT",
+  "problems": [
+    {
+      "id": "balance",
+      "title": "Balance a score sheet",
+      "topic": "Arrays",
+      "difficulty": "Easy",
+      "tags": [
+        "prefix sum"
+      ],
+      "statement": "Return the first index where the sum strictly before it equals the sum strictly after it; return -1 if none exists.",
+      "constraints": "0 ≤ n ≤ 100000; integer values with absolute value ≤ 10000.",
+      "params": [
+        "scores"
+      ],
+      "hint": "Track the remaining sum while scanning.",
+      "editorial": "Subtract the current value from the right sum, compare with the left sum, then add the current value to the left sum.",
+      "complexity": "O(n) time, O(1) space",
+      "starter": {
+        "javascript": "function solve(scores) {\n  // Write your solution here\n}\n",
+        "python": "def solve(scores):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(scores) {\nlet r=scores.reduce((a,b)=>a+b,0),l=0;for(let i=0;i<scores.length;i++){r-=scores[i];if(l===r)return i;l+=scores[i]}return -1;\n}",
+        "python": "def solve(scores):\n    r=sum(scores)\n    l=0\n    for i,x in enumerate(scores):\n        r-=x\n        if l==r: return i\n        l+=x\n    return -1\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              1,
+              3,
+              3
+            ]
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            [
+              0
+            ]
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": -1
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expected": -1
+        }
+      ]
+    },
+    {
+      "id": "dedupe",
+      "title": "Stable event deduplication",
+      "topic": "Hashing",
+      "difficulty": "Easy",
+      "tags": [
+        "set"
+      ],
+      "statement": "Remove repeated integer IDs, keeping the first occurrence in original order.",
+      "constraints": "0 ≤ n ≤ 100000; integer IDs.",
+      "params": [
+        "ids"
+      ],
+      "hint": "Keep a set of seen IDs.",
+      "editorial": "Append only the first occurrence of each ID.",
+      "complexity": "O(n) expected time, O(n) space",
+      "starter": {
+        "javascript": "function solve(ids) {\n  // Write your solution here\n}\n",
+        "python": "def solve(ids):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(ids) {\nreturn [...new Set(ids)];\n}",
+        "python": "def solve(ids):\n    return list(dict.fromkeys(ids))\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              4,
+              2,
+              4,
+              1,
+              2
+            ]
+          ],
+          "expected": [
+            4,
+            2,
+            1
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        },
+        {
+          "args": [
+            [
+              0,
+              0,
+              -1
+            ]
+          ],
+          "expected": [
+            0,
+            -1
+          ]
+        },
+        {
+          "args": [
+            [
+              3,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            3,
+            2,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unique",
+      "title": "First unique event",
+      "topic": "Hashing",
+      "difficulty": "Easy",
+      "tags": [
+        "frequency"
+      ],
+      "statement": "Return the first integer appearing exactly once, or null (Python None) if no such integer exists.",
+      "constraints": "0 ≤ n ≤ 100000; integer IDs.",
+      "params": [
+        "events"
+      ],
+      "hint": "Count occurrences first.",
+      "editorial": "Build a frequency map, then scan in the original order.",
+      "complexity": "O(n) expected time, O(n) space",
+      "starter": {
+        "javascript": "function solve(events) {\n  // Write your solution here\n}\n",
+        "python": "def solve(events):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(events) {\nlet m=new Map();for(let x of events)m.set(x,(m.get(x)||0)+1);return events.find(x=>m.get(x)===1)??null;\n}",
+        "python": "def solve(events):\n    from collections import Counter\n    m=Counter(events)\n    return next((x for x in events if m[x]==1),None)\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              5,
+              2,
+              7
+            ]
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            [
+              1,
+              1
+            ]
+          ],
+          "expected": null
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": null
+        },
+        {
+          "args": [
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "id": "threshold",
+      "title": "First qualifying measurement",
+      "topic": "Searching",
+      "difficulty": "Easy",
+      "tags": [
+        "binary search"
+      ],
+      "statement": "Given a sorted nondecreasing array and threshold, return the first index with value at least the threshold, or -1 if none exists.",
+      "constraints": "0 ≤ n ≤ 1000000; integer values sorted ascending.",
+      "params": [
+        "values",
+        "threshold"
+      ],
+      "hint": "Search for the boundary.",
+      "editorial": "Maintain a half-open interval. Discard the left half when its midpoint is below the threshold; otherwise retain the midpoint.",
+      "complexity": "O(log n) time, O(1) space",
+      "starter": {
+        "javascript": "function solve(values, threshold) {\n  // Write your solution here\n}\n",
+        "python": "def solve(values, threshold):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(values, threshold) {\nlet l=0,r=values.length;while(l<r){let m=Math.floor((l+r)/2);if(values[m]<threshold)l=m+1;else r=m}return l<values.length?l:-1;\n}",
+        "python": "def solve(values, threshold):\n    l,r=0,len(values)\n    while l<r:\n        m=(l+r)//2\n        if values[m]<threshold: l=m+1\n        else: r=m\n    return l if l<len(values) else -1\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              3,
+              3,
+              8
+            ],
+            3
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            [],
+            1
+          ],
+          "expected": -1
+        },
+        {
+          "args": [
+            [
+              2,
+              4
+            ],
+            5
+          ],
+          "expected": -1
+        },
+        {
+          "args": [
+            [
+              2,
+              4
+            ],
+            0
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "id": "brackets",
+      "title": "Validate bracket configuration",
+      "topic": "Stacks",
+      "difficulty": "Easy",
+      "tags": [
+        "stack"
+      ],
+      "statement": "Return whether a string of brackets ()[]{} is correctly matched and nested.",
+      "constraints": "0 ≤ length ≤ 100000; only bracket characters.",
+      "params": [
+        "text"
+      ],
+      "hint": "Keep unmatched openers on a stack.",
+      "editorial": "Push openers and compare each closer to the last opener. The stack must end empty.",
+      "complexity": "O(n) time, O(n) space",
+      "starter": {
+        "javascript": "function solve(text) {\n  // Write your solution here\n}\n",
+        "python": "def solve(text):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(text) {\nlet s=[],m={')':'(',']':'[','}':'{'};for(let c of text){if('([{'.includes(c))s.push(c);else if(s.pop()!==m[c])return false}return !s.length;\n}",
+        "python": "def solve(text):\n    s=[]\n    m={')':'(',']':'[','}':'{'}\n    for c in text:\n        if c in '([{': s.append(c)\n        elif not s or s.pop()!=m[c]: return False\n    return not s\n"
+      },
+      "tests": [
+        {
+          "args": [
+            "{[()]}"
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            "([)]"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            ")"
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            "(("
+          ],
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "span",
+      "title": "Longest unique token span",
+      "topic": "Strings",
+      "difficulty": "Medium",
+      "tags": [
+        "sliding window"
+      ],
+      "statement": "Return the length of the longest contiguous substring containing no repeated characters.",
+      "constraints": "0 ≤ length ≤ 100000; ASCII only.",
+      "params": [
+        "text"
+      ],
+      "hint": "Track the last index of each character.",
+      "editorial": "Advance the left edge past any repeat inside the current window. Track the maximum length.",
+      "complexity": "O(n) time, O(min(n, alphabet)) space",
+      "starter": {
+        "javascript": "function solve(text) {\n  // Write your solution here\n}\n",
+        "python": "def solve(text):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(text) {\nlet m=new Map(),l=0,b=0;for(let r=0;r<text.length;r++){l=Math.max(l,(m.get(text[r])??-1)+1);m.set(text[r],r);b=Math.max(b,r-l+1)}return b;\n}",
+        "python": "def solve(text):\n    m={}\n    l=b=0\n    for r,c in enumerate(text):\n        l=max(l,m.get(c,-1)+1)\n        m[c]=r\n        b=max(b,r-l+1)\n    return b\n"
+      },
+      "tests": [
+        {
+          "args": [
+            "abcaef"
+          ],
+          "expected": 5
+        },
+        {
+          "args": [
+            ""
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            "aaaa"
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            "pwwkew"
+          ],
+          "expected": 3
+        }
+      ]
+    },
+    {
+      "id": "peak",
+      "title": "Peak traffic window",
+      "topic": "Arrays",
+      "difficulty": "Medium",
+      "tags": [
+        "sliding window"
+      ],
+      "statement": "Return the largest sum of any contiguous block of exactly k integer measurements.",
+      "constraints": "1 ≤ k ≤ n ≤ 100000; values may be negative; absolute value ≤ 10000.",
+      "params": [
+        "values",
+        "k"
+      ],
+      "hint": "Slide a fixed-size window.",
+      "editorial": "Compute the first window, then subtract the outgoing element and add the incoming one.",
+      "complexity": "O(n) time, O(1) auxiliary space",
+      "starter": {
+        "javascript": "function solve(values, k) {\n  // Write your solution here\n}\n",
+        "python": "def solve(values, k):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(values, k) {\nlet s=0;for(let i=0;i<k;i++)s+=values[i];let b=s;for(let i=k;i<values.length;i++){s+=values[i]-values[i-k];b=Math.max(b,s)}return b;\n}",
+        "python": "def solve(values, k):\n    s=sum(values[:k])\n    b=s\n    for i in range(k,len(values)):\n        s+=values[i]-values[i-k]\n        b=max(b,s)\n    return b\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              5,
+              -2,
+              4
+            ],
+            2
+          ],
+          "expected": 6
+        },
+        {
+          "args": [
+            [
+              -5,
+              -2,
+              -4
+            ],
+            2
+          ],
+          "expected": -6
+        },
+        {
+          "args": [
+            [
+              7
+            ],
+            1
+          ],
+          "expected": 7
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ],
+            3
+          ],
+          "expected": 6
+        }
+      ]
+    },
+    {
+      "id": "alerts",
+      "title": "Next higher alert",
+      "topic": "Stacks",
+      "difficulty": "Medium",
+      "tags": [
+        "monotonic stack"
+      ],
+      "statement": "For each integer reading, return the distance to the first strictly higher reading to its right, or zero if none exists.",
+      "constraints": "0 ≤ n ≤ 100000.",
+      "params": [
+        "readings"
+      ],
+      "hint": "Store unresolved indices.",
+      "editorial": "Maintain a decreasing stack; a higher reading resolves smaller readings on top of it.",
+      "complexity": "O(n) time, O(n) space",
+      "starter": {
+        "javascript": "function solve(readings) {\n  // Write your solution here\n}\n",
+        "python": "def solve(readings):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(readings) {\nlet o=Array(readings.length).fill(0),s=[];for(let i=0;i<readings.length;i++){while(s.length&&readings[s.at(-1)]<readings[i]){let j=s.pop();o[j]=i-j}s.push(i)}return o;\n}",
+        "python": "def solve(readings):\n    o=[0]*len(readings)\n    s=[]\n    for i,x in enumerate(readings):\n        while s and readings[s[-1]]<x:\n            j=s.pop()\n            o[j]=i-j\n        s.append(i)\n    return o\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              4,
+              2,
+              3,
+              5
+            ]
+          ],
+          "expected": [
+            3,
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": []
+        },
+        {
+          "args": [
+            [
+              2,
+              2,
+              2
+            ]
+          ],
+          "expected": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "args": [
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "expected": [
+            1,
+            1,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hops",
+      "title": "Minimum network hops",
+      "topic": "Graphs",
+      "difficulty": "Medium",
+      "tags": [
+        "breadth-first search"
+      ],
+      "statement": "Given n undirected nodes numbered 0 to n-1, edges and start/target nodes, return the shortest path length in edges or -1 if unreachable.",
+      "constraints": "1 ≤ n ≤ 10000; ≤ 50000 edges; valid node IDs.",
+      "params": [
+        "n",
+        "edges",
+        "start",
+        "target"
+      ],
+      "hint": "Explore by distance layers.",
+      "editorial": "Build adjacency lists and visit unseen neighbors in queue order, recording the distance.",
+      "complexity": "O(n+e) time and space",
+      "starter": {
+        "javascript": "function solve(n, edges, start, target) {\n  // Write your solution here\n}\n",
+        "python": "def solve(n, edges, start, target):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(n, edges, start, target) {\nlet g=Array.from({length:n},()=>[]);for(let[a,b]of edges){g[a].push(b);g[b].push(a)}let d=Array(n).fill(-1),q=[start];d[start]=0;for(let i=0;i<q.length;i++){let a=q[i];if(a===target)return d[a];for(let b of g[a])if(d[b]<0){d[b]=d[a]+1;q.push(b)}}return -1;\n}",
+        "python": "def solve(n, edges, start, target):\n    g=[[] for _ in range(n)]\n    for a,b in edges: g[a].append(b); g[b].append(a)\n    d=[-1]*n\n    d[start]=0\n    q=[start]\n    for a in q:\n        if a==target: return d[a]\n        for b in g[a]:\n            if d[b]<0: d[b]=d[a]+1; q.append(b)\n    return -1\n"
+      },
+      "tests": [
+        {
+          "args": [
+            4,
+            [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                0,
+                3
+              ]
+            ],
+            0,
+            2
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            3,
+            [],
+            0,
+            2
+          ],
+          "expected": -1
+        },
+        {
+          "args": [
+            1,
+            [],
+            0,
+            0
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            4,
+            [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                0,
+                3
+              ]
+            ],
+            0,
+            3
+          ],
+          "expected": 1
+        }
+      ]
+    },
+    {
+      "id": "jobs",
+      "title": "Validate job dependencies",
+      "topic": "Graphs",
+      "difficulty": "Medium",
+      "tags": [
+        "topological sorting"
+      ],
+      "statement": "Given n jobs and directed edges [a,b] indicating a precedes b, return whether all jobs can finish without a dependency cycle.",
+      "constraints": "0 ≤ n ≤ 10000; ≤ 50000 valid edges.",
+      "params": [
+        "n",
+        "edges"
+      ],
+      "hint": "Track incoming dependencies.",
+      "editorial": "Remove jobs of zero indegree and decrement their neighbors. All jobs must be removed.",
+      "complexity": "O(n+e) time and space",
+      "starter": {
+        "javascript": "function solve(n, edges) {\n  // Write your solution here\n}\n",
+        "python": "def solve(n, edges):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(n, edges) {\nlet g=Array.from({length:n},()=>[]),d=Array(n).fill(0);for(let[a,b]of edges){g[a].push(b);d[b]++}let q=[];for(let i=0;i<n;i++)if(!d[i])q.push(i);for(let i=0;i<q.length;i++)for(let b of g[q[i]])if(--d[b]===0)q.push(b);return q.length===n;\n}",
+        "python": "def solve(n, edges):\n    g=[[] for _ in range(n)]\n    d=[0]*n\n    for a,b in edges: g[a].append(b); d[b]+=1\n    q=[i for i in range(n) if d[i]==0]\n    for a in q:\n        for b in g[a]:\n            d[b]-=1\n            if d[b]==0: q.append(b)\n    return len(q)==n\n"
+      },
+      "tests": [
+        {
+          "args": [
+            3,
+            [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                2
+              ]
+            ]
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            2,
+            [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                0
+              ]
+            ]
+          ],
+          "expected": false
+        },
+        {
+          "args": [
+            0,
+            []
+          ],
+          "expected": true
+        },
+        {
+          "args": [
+            1,
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "expected": false
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "title": "Minimum payment tokens",
+      "topic": "Dynamic Programming",
+      "difficulty": "Medium",
+      "tags": [
+        "unbounded knapsack"
+      ],
+      "statement": "Return the smallest number of positive-denomination tokens making amount, allowing reuse, or -1 if impossible.",
+      "constraints": "0 ≤ amount ≤ 10000; ≤ 100 positive denominations.",
+      "params": [
+        "coins",
+        "amount"
+      ],
+      "hint": "Build optimal answers for smaller amounts.",
+      "editorial": "Initialize dp[0]=0, use an impossible sentinel elsewhere, and try each denomination that fits.",
+      "complexity": "O(amount × coins) time, O(amount) space",
+      "starter": {
+        "javascript": "function solve(coins, amount) {\n  // Write your solution here\n}\n",
+        "python": "def solve(coins, amount):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(coins, amount) {\nlet d=Array(amount+1).fill(amount+1);d[0]=0;for(let i=1;i<=amount;i++)for(let c of coins)if(c<=i)d[i]=Math.min(d[i],d[i-c]+1);return d[amount]>amount?-1:d[amount];\n}",
+        "python": "def solve(coins, amount):\n    d=[amount+1]*(amount+1)\n    d[0]=0\n    for i in range(1,amount+1):\n        for c in coins:\n            if c<=i: d[i]=min(d[i],d[i-c]+1)\n    return d[amount] if d[amount]<=amount else -1\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              1,
+              3,
+              4
+            ],
+            6
+          ],
+          "expected": 2
+        },
+        {
+          "args": [
+            [
+              2
+            ],
+            3
+          ],
+          "expected": -1
+        },
+        {
+          "args": [
+            [],
+            0
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            [
+              5
+            ],
+            10
+          ],
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "rewards",
+      "title": "Non-adjacent reward selection",
+      "topic": "Dynamic Programming",
+      "difficulty": "Medium",
+      "tags": [
+        "rolling DP"
+      ],
+      "statement": "Maximize the sum of a subset of non-adjacent integer rewards. Choosing no positions is allowed.",
+      "constraints": "0 ≤ n ≤ 100000; absolute reward ≤ 10000.",
+      "params": [
+        "rewards"
+      ],
+      "hint": "Compare taking a reward with skipping it.",
+      "editorial": "Keep two rolling states: best through the preceding position, and best through two positions earlier.",
+      "complexity": "O(n) time, O(1) space",
+      "starter": {
+        "javascript": "function solve(rewards) {\n  // Write your solution here\n}\n",
+        "python": "def solve(rewards):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(rewards) {\nlet a=0,b=0;for(let x of rewards){let c=Math.max(b,a+x);a=b;b=c}return b;\n}",
+        "python": "def solve(rewards):\n    a=b=0\n    for x in rewards: a,b=b,max(b,a+x)\n    return b\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              7,
+              9,
+              3,
+              1
+            ]
+          ],
+          "expected": 12
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            [
+              -5,
+              -1
+            ]
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            [
+              5,
+              1,
+              5
+            ]
+          ],
+          "expected": 10
+        }
+      ]
+    },
+    {
+      "id": "subsequence",
+      "title": "Shared ordered signal",
+      "topic": "Dynamic Programming",
+      "difficulty": "Hard",
+      "tags": [
+        "sequence DP"
+      ],
+      "statement": "Return the length of the longest common subsequence of two ASCII strings. Characters need not be contiguous.",
+      "constraints": "0 ≤ each length ≤ 500.",
+      "params": [
+        "a",
+        "b"
+      ],
+      "hint": "Define a state for each pair of prefixes.",
+      "editorial": "Match extends the diagonal state; otherwise choose the greater adjacent state. Keep two rows.",
+      "complexity": "O(nm) time, O(m) space",
+      "starter": {
+        "javascript": "function solve(a, b) {\n  // Write your solution here\n}\n",
+        "python": "def solve(a, b):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(a, b) {\nlet p=Array(b.length+1).fill(0);for(let x of a){let q=[0];for(let j=1;j<=b.length;j++)q[j]=x===b[j-1]?p[j-1]+1:Math.max(p[j],q[j-1]);p=q}return p[b.length];\n}",
+        "python": "def solve(a, b):\n    p=[0]*(len(b)+1)\n    for x in a:\n        q=[0]\n        for j,y in enumerate(b,1): q.append(p[j-1]+1 if x==y else max(p[j],q[-1]))\n        p=q\n    return p[-1]\n"
+      },
+      "tests": [
+        {
+          "args": [
+            "abcde",
+            "ace"
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            "",
+            "a"
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            "abc",
+            "def"
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            "aaaa",
+            "aa"
+          ],
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "correction",
+      "title": "Minimum text correction",
+      "topic": "Dynamic Programming",
+      "difficulty": "Hard",
+      "tags": [
+        "edit distance"
+      ],
+      "statement": "Return the minimum number of single-character insertions, deletions or substitutions needed to transform ASCII string a into b.",
+      "constraints": "0 ≤ each length ≤ 500.",
+      "params": [
+        "a",
+        "b"
+      ],
+      "hint": "Initialize empty-prefix distances.",
+      "editorial": "For a match use the diagonal state. Otherwise add one to the minimum of insertion, deletion and substitution states.",
+      "complexity": "O(nm) time, O(m) space",
+      "starter": {
+        "javascript": "function solve(a, b) {\n  // Write your solution here\n}\n",
+        "python": "def solve(a, b):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(a, b) {\nlet p=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let q=[i];for(let j=1;j<=b.length;j++)q[j]=a[i-1]===b[j-1]?p[j-1]:1+Math.min(p[j],q[j-1],p[j-1]);p=q}return p[b.length];\n}",
+        "python": "def solve(a, b):\n    p=list(range(len(b)+1))\n    for i,x in enumerate(a,1):\n        q=[i]\n        for j,y in enumerate(b,1): q.append(p[j-1] if x==y else 1+min(p[j],q[-1],p[j-1]))\n        p=q\n    return p[-1]\n"
+      },
+      "tests": [
+        {
+          "args": [
+            "kitten",
+            "sitting"
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            "",
+            "abc"
+          ],
+          "expected": 3
+        },
+        {
+          "args": [
+            "abc",
+            "abc"
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            "ab",
+            "ba"
+          ],
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "rectangle",
+      "title": "Largest storage rectangle",
+      "topic": "Stacks",
+      "difficulty": "Hard",
+      "tags": [
+        "monotonic stack"
+      ],
+      "statement": "Given nonnegative histogram heights of unit-width bars, return the largest rectangular area contained in consecutive bars.",
+      "constraints": "0 ≤ n ≤ 100000; heights ≤ 10000.",
+      "params": [
+        "heights"
+      ],
+      "hint": "Find when a bar can no longer extend right.",
+      "editorial": "Keep an increasing stack with a trailing zero. When popping a taller bar, compute its maximal width using the new stack top.",
+      "complexity": "O(n) time, O(n) space",
+      "starter": {
+        "javascript": "function solve(heights) {\n  // Write your solution here\n}\n",
+        "python": "def solve(heights):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(heights) {\nlet s=[],best=0,h=[...heights,0];for(let i=0;i<h.length;i++){while(s.length&&h[s.at(-1)]>h[i]){let v=h[s.pop()],l=s.length?s.at(-1):-1;best=Math.max(best,v*(i-l-1))}s.push(i)}return best;\n}",
+        "python": "def solve(heights):\n    h=heights+[0]\n    s=[]\n    best=0\n    for i,x in enumerate(h):\n        while s and h[s[-1]]>x:\n            v=h[s.pop()]\n            l=s[-1] if s else -1\n            best=max(best,v*(i-l-1))\n        s.append(i)\n    return best\n"
+      },
+      "tests": [
+        {
+          "args": [
+            [
+              2,
+              1,
+              5,
+              6,
+              2,
+              3
+            ]
+          ],
+          "expected": 10
+        },
+        {
+          "args": [
+            []
+          ],
+          "expected": 0
+        },
+        {
+          "args": [
+            [
+              2,
+              2
+            ]
+          ],
+          "expected": 4
+        },
+        {
+          "args": [
+            [
+              0,
+              0
+            ]
+          ],
+          "expected": 0
+        }
+      ]
+    },
+    {
+      "id": "stairs",
+      "title": "Count staircase routes",
+      "topic": "Dynamic Programming",
+      "difficulty": "Easy",
+      "tags": [
+        "recurrence"
+      ],
+      "statement": "Count distinct ways to reach step n using steps of size 1 or 2. Return 1 for n=0.",
+      "constraints": "0 ≤ n ≤ 45.",
+      "params": [
+        "n"
+      ],
+      "hint": "The last move has size one or two.",
+      "editorial": "Use the Fibonacci recurrence with one way to reach step zero and step one.",
+      "complexity": "O(n) time, O(1) space",
+      "starter": {
+        "javascript": "function solve(n) {\n  // Write your solution here\n}\n",
+        "python": "def solve(n):\n    # Write your solution here\n    pass\n"
+      },
+      "reference": {
+        "javascript": "function solve(n) {\nlet a=1,b=1;for(let i=0;i<n;i++)[a,b]=[b,a+b];return a;\n}",
+        "python": "def solve(n):\n    a=b=1\n    for _ in range(n): a,b=b,a+b\n    return a\n"
+      },
+      "tests": [
+        {
+          "args": [
+            0
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            1
+          ],
+          "expected": 1
+        },
+        {
+          "args": [
+            5
+          ],
+          "expected": 8
+        },
+        {
+          "args": [
+            10
+          ],
+          "expected": 89
+        }
+      ]
+    }
+  ]
+}
