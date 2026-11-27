@@ -1,4 +1,14 @@
-# ⚡ Ironyx Code
+# Ironyx ML + Code
+
+[Live educational workspace](https://anku0669.github.io/Ironynx/) · [Original coding platform](https://anku0669.github.io/Ironynx/coding.html#home)
+
+Ironyx ML is an independent machine-learning practice workspace with a searchable catalog of 164 public Deep-ML problems at a pinned upstream revision, problem descriptions, learning notes, examples, starter code, reference solutions, and public test cases. Python runs in a browser worker using Pyodide; framework variants are available for reading and local practice. Progress, bookmarks and drafts are stored locally in the browser. No hosted account system, private judge or premium Deep-ML content is included.
+
+**Content licensing:** Ironyx's own application code remains MIT licensed. The upstream Deep-ML problem bank is separately governed by the [Educational Use Only License](public/ml-data/LICENSE.txt), not MIT. It must not be commercialized or used as model training data. Original authorship and upstream source attribution are retained. See [third-party notice](public/ml-data/NOTICE.md).
+
+## Existing coding platform
+
+The previous Ironyx Code application remains accessible via `coding.html#home`. The instructions below describe that original platform and self-hosted execution options.
 
 A **free, gamified, browser-based coding platform**. Pick from **34 tracks** (24 programming languages + HTML, CSS, SCSS, JSON, YAML, Markdown, XML, Dockerfile, GraphQL, Regex), solve **4,800+ interactive challenges**, learn from built-in study material, write code in a **full browser IDE** (Monaco, the VS Code editor), run it for real, earn **XP**, build **daily streaks**, **level up**, and unlock **badges**.
 
