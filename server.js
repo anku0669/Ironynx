@@ -53,7 +53,7 @@ app.use((req, res, next) => {
       "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
       "img-src 'self' data: blob:",
       // The browser talks directly to Wandbox; Pyodide/Monaco fetch assets from jsDelivr.
-      "connect-src 'self' https://wandbox.org https://cdn.jsdelivr.net",
+      "connect-src 'self' https://wandbox.org https://cdn.jsdelivr.net https://raw.githubusercontent.com",
       "worker-src 'self' blob:",
       "child-frame-src 'self' blob:",
       "frame-src 'self' blob:",
