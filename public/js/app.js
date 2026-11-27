@@ -151,11 +151,11 @@ function render() {
 function renderHome() {
   const done = completedCount(), total = totalLessons();
   app.innerHTML = `
-    <section class="hero">
-      <h1>Learn to code by <span class="grad">playing</span>.</h1>
+    <section class="hero ix-code-hero"><div><div class="ix-code-eyebrow">IRONYX / CODE STUDIO</div>
+      <h1>Build skills.<br><span class="grad">Write real code.</span></h1>
       <p>Master ${C.length} languages with <b>${total.toLocaleString()}+ interactive challenges</b> — including a LeetCode-style DSA track — in a full-featured browser IDE. Run real code, earn XP, keep your streak, and level up.</p>
       <div class="hero-cta"><button class="btn primary" id="ctaStart">Start learning</button><button class="btn ghost" id="ctaPlay">Open IDE Playground</button></div>
-      <div class="stats-row">
+      </div><div class="ix-code-terminal" aria-label="Illustrative Python code"><div class="ix-code-terminal-head"><i></i><i></i><i></i><span>practice.py</span></div><pre><span class="comment"># One challenge at a time</span>\n<span class="kw">def</span> learn():\n    return "Keep building"\n\nprint(learn())</pre><div class="out">› Keep building <span class="cursor"></span></div></div><div class="stats-row">
         <div class="stat"><div class="num">${C.length}</div><div class="lbl">Languages</div></div>
         <div class="stat"><div class="num">${total.toLocaleString()}</div><div class="lbl">Challenges</div></div>
         <div class="stat"><div class="num">${state.xp}</div><div class="lbl">Your XP</div></div>
@@ -163,7 +163,7 @@ function renderHome() {
       </div>
     </section>
     <div class="section-head"><h2>Choose your language</h2><span class="sub">${C.length} tracks · free forever</span></div>
-    <div class="track-grid" id="trackGrid"></div>`;
+    <input class="ix-track-search" id="ixTrackSearch" type="search" aria-label="Find a programming track" placeholder="Find a language or topic…"><div class="track-grid" id="trackGrid"></div>`;
   $("ctaStart").onclick = () => $("trackGrid").scrollIntoView({ behavior: "smooth" });
   $("ctaPlay").onclick = () => go("playground");
   C.forEach((t) => {
@@ -173,9 +173,10 @@ function renderHome() {
     card.innerHTML = `<div class="track-icon">${t.icon}</div><h3>${esc(t.name)}</h3><div class="blurb">${esc(t.blurb)}</div>
       <div class="progress-bar"><span style="width:${pct}%"></span></div>
       <div class="track-meta"><span class="lessons">${doneN}/${t.lessons.length} lessons</span><span class="lessons">${pct}%</span></div>`;
-    card.onclick = () => go("track", { id: t.id });
+    card.tabIndex = 0; card.setAttribute("role","button"); card.onclick = () => go("track", { id: t.id }); card.onkeydown = e => { if(e.key==="Enter"||e.key===" "){e.preventDefault();card.click();} };
     $("trackGrid").appendChild(card);
   });
+  if($("ixTrackSearch")) $("ixTrackSearch").oninput=e=>{const q=e.target.value.toLowerCase().trim();document.querySelectorAll(".track-card").forEach(c=>c.hidden=!c.textContent.toLowerCase().includes(q));};
 }
 
 /* ============================================================ TRACK (collapsible + search + learning material) */
