@@ -1,0 +1,44 @@
+name: Import pinned educational ML problem bank
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/import-ml.py', '.github/workflows/import-ml.yml']
+permissions:
+  contents: write
+concurrency:
+  group: ml-data
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/checkout@v4
+        with:
+          repository: Open-Deep-ML/DML-OpenProblem
+          ref: 04708b485a051316c25b91e4cb9a2ada0ccf7fbf
+          path: upstream-ml
+          persist-credentials: false
+      - name: Validate and import pinned problem records
+        run: python3 scripts/import-ml.py upstream-ml public/ml-data
+      - name: Publish snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/ml-data
+          if ! git diff --cached --quiet; then
+            git commit -m "Import licensed educational problem snapshot"
+            git push origin HEAD:main
+          fi
+          git fetch origin gh-pages
+          git worktree add -b ml-snapshot /tmp/ironyx-pages origin/gh-pages
+          cp -a public/ml-data/. /tmp/ironyx-pages/ml-data/
+          cd /tmp/ironyx-pages
+          git add ml-data
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish licensed educational problem snapshot"
+            git push origin HEAD:gh-pages
+          fi
